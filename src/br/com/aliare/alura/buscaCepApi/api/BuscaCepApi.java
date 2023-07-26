@@ -26,26 +26,6 @@ public class BuscaCepApi {
 
 			HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
 
-			String json = response.body();
-
-            EnderecoDTOTypeAdapter enderecoDTOTypeAdapter = new EnderecoDTOTypeAdapter();
-
-            Gson gson = new GsonBuilder()
-                    .registerTypeAdapter(EnderecoDTO.class, enderecoDTOTypeAdapter)
-                    .create();
-            
-            EnderecoDTO dto = gson.fromJson(json, EnderecoDTO.class);
-
-			
-            if (dto != null) {
-				// Criar o objeto Endereco usando o construtor que aceita EnderecoDTO
-                Endereco endereco = new Endereco(dto);
-
-				System.out.println(endereco);
-			} else {
-				System.out.println("Erro ao desserializar o JSON. Objeto EnderecoDTO é nulo.");
-			}
-
 			return response.body();
 
 		} catch (Exception e) {
